@@ -205,3 +205,112 @@ int main()
   }
    return 0;
 }
+
+void ADD(student** list, student* newStudent, int size) {
+  int index = (newStudent->id) % size;
+	
+  //put new student in current array
+  if (list[index] == NULL) {
+    //no colision, simply add to list
+    list[index] = newStudent;
+  } else {
+    //collision, then add as next ptr
+    if ((list[index])->next == NULL) {
+      //no previous collision
+      (list[index])->next = newStudent;
+      (list[index]->next)->prev = (list[index])->next;
+    } else {
+      //already a collision existent there
+      ((list[index])->next)->next = newStudent;
+      (((list[index])->next)->next)->prev = ((list[index])->next)->next;
+    }
+  }
+}
+
+bool COLL(student** list, int size) 
+{
+  bool newlist = false;  //keep trak whether there's a need to make a new list
+  int ctr = 0;
+  while (newlist == false && ctr < size) 
+  {
+    if (list[ctr] != NULL) 
+    {
+      if ((list[ctr])->next != NULL) 
+      {
+	if (((list[ctr])->next)->next != NULL) 
+	{
+	  newlist = true;
+	}
+      }
+    }
+    ctr++;
+  }
+  return newlist;
+}
+
+void PRINT(student** list, int size) 
+{
+  for (int i = 0; i < size; i++) 
+  {
+    student* curr = list[i];
+    if (curr != NULL) 
+    {
+      cout << curr->Fname << " ";
+      cout << curr->Lname;
+      cout << " #" << curr->id << " GPA:";
+      cout << fixed << setprecision(2) << curr->gpa;
+      student* nxt = curr->next;
+      if (nxt != NULL) 
+      {
+	cout << '\t' << nxt->Fname << " ";
+	cout << nxt->Lname;
+	cout << "#" << nxt->id << " GPA:";
+	cout << fixed << setprecision(2) << nxt->gpa;
+      }
+      cout << endl;
+    } 
+  }
+}
+
+void REMOVE(student** list, int id, int size) 
+{
+  int i = id % size;
+  if (list[i] == NULL) 
+  {
+    cout << endl << "No such student to remove." << endl;
+  } else {
+    if (list[i]->id == id) 
+    {
+      //found then delete
+      if (list[i]->next == NULL) 
+      {
+	list[i] = NULL; 
+      } else 
+      {
+	//replace with next in collision
+	student* newcurr = list[i]->next;
+	newcurr->prev = NULL;
+	list[i] = newcurr;
+      }
+    } 
+     else 
+     {
+      if (list[i]->next == NULL) 
+      {
+	cout << endl << "They don't exist :(" << endl;
+      }
+      else 
+      {
+	if (list[i]->next->id == id) 
+	{
+	  //found then remove
+	  list[i]->next = NULL;
+	} 
+	else 
+	{
+	    cout << "They don't exist :(" << endl;
+	}
+      }
+    }
+  }
+}
