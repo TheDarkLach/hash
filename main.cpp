@@ -29,7 +29,7 @@ int main()
 {
   bool run = true;
   char input[10];
-  int randid = 6; //keeps track of id
+  int randid = 123; //keeps track of id
   
   student** list = new student*[100];
   int size = 100;
