@@ -17,7 +17,7 @@ struct student
   int id;
   float gpa;
   student* next;
-  student prev*;
+  student* prev;
 };
 
 void ADD(student** list, student* newStudent, int size);
