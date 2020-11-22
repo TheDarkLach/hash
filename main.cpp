@@ -12,8 +12,8 @@ using namespace std;
 
 struct student
 {
-  char Fname[80];
-  char Lname[80];
+  char Fname[81];
+  char Lname[81];
   int id;
   float gpa;
   student* next;
@@ -121,7 +121,7 @@ int main()
       //initialize name arrays
       char** namef = new char*[20];
       char** namel = new char*[20];
-      for (int i = 0; i < 20; i++) {
+      for (int i = 0; i < 10; i++) {
 	namef[i] = new char[81];
 	namel[i] = new char[81];
       }
