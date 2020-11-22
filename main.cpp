@@ -132,7 +132,7 @@ int main()
       ifstream myfile("fnames.txt");
       int linenr = 0;
       char first[81];
-      while (linenr < 20) {
+      while (linenr < 10) {
 	myfile.getline(first, 81);
 	cout << first << linenr << endl;
 	strcpy(namef[linenr], first);
@@ -141,16 +141,16 @@ int main()
       ifstream myfile1("lnames.txt");
       char last[81];
       linenr = 0; //restar count
-      while (linenr < 20) {
+      while (linenr < 10) {
 	myfile1.getline(last, 81);
 	strcpy(namel[linenr], last);
 	linenr++;
       }
       while (num > 0) {
 	student* newStudent = new student();  //initalize new student
-	//make random numbers between 0 and 19
-	int randomf = rand() % 19;
-	int randoml = rand() % 19;
+	//make random numbers between 0 and 9
+	int randomf = rand() % 9;
+	int randoml = rand() % 9;
 	//assign random data to new studen
 	strcpy(newStudent->Fname, namef[randomf]);
 	strcpy(newStudent->Lname, namel[randoml]);
@@ -163,7 +163,7 @@ int main()
 	ADD(list, newStudent, size);
 	//balance if collision
 	if (COLL(list, size)) {
-	  cout << endl << ">>Rebalancing hash table array to double the size." << endl;
+	  cout << endl << "Changing hash table array to double the size." << endl;
 	  student** temp = new student*[size];  //create temp array
 	  for (int m = 0; m < size; m++) {
 	    temp[m] = list[m];
