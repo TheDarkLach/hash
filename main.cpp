@@ -99,5 +99,19 @@ int main()
 	size = newsize; //update list's size
       }
     }
+     else if (strcmp(input, "remove") == 0) 
+     { 
+      cout << "Input ID of student to remove: ";
+      int in;
+      cin >> in;
+      cin.clear();
+      cin.ignore(10000, '\n');
+      REMOVE(list, in, size);
+    }
+    else if (strcmp(input, "print") == 0) 
+    {
+      PRINT(list, size);
+    }
   }
+   return 0;
 }
