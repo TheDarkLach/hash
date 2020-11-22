@@ -1,3 +1,7 @@
+//Hastable by Faizan Karim
+//randomly generated names come from a list i made
+//got names from google :/
+
 #include <cstring>
 #include <iostream>
 #include <fstream>
