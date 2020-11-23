@@ -158,9 +158,9 @@ int main()
 	newStudent->gpa = (float)rand()/(RAND_MAX)*5;
 	randid = randid + 10;
 	//add new student genrated
-	ADD(list, newStud, size);
+	ADD(list, newStudent, size);
 	//balance if collision
-	if (checkCollision(list, size)) {
+	if (COLL(list, size)) {
 	  cout << endl << ">>Rebalancing hash table array to double the size." << endl;
 	  student** temp = new student*[size];  //create temp array
 	  for (int m = 0; m < size; m++) {
