@@ -157,7 +157,7 @@ int main() {
 	strcpy(newStudent->Fname, namef[randomf]);
 	strcpy(newStudent->Lname, namel[randoml]);
 	newStudent->id = randid;
-	newStud->gpa = (float)rand()/(RAND_MAX)*5;
+	newStudent->gpa = (float)rand()/(RAND_MAX)*5;
 	randid = randid + 100;
 	//add new student genrated
 	ADD(list, newStudent, size);
