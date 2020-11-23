@@ -116,12 +116,12 @@ int main()
     {
       PRINT(list, size);
     }
-    else if (strcmp(input, "addrand") == 0) {  //add random student
+     else if (strcmp(input, "addrand") == 0) {  //add random student
       int num;
       //initialize name arrays
       char** namef = new char*[20];
       char** namel = new char*[20];
-      for (int i = 0; i < 10; i++) {
+      for (int i = 0; i < 20; i++) {
 	namef[i] = new char[81];
 	namel[i] = new char[81];
       }
@@ -132,7 +132,7 @@ int main()
       ifstream myfile("fnames.txt");
       int linenr = 0;
       char first[81];
-      while (linenr < 10) {
+      while (linenr < 20) {
 	myfile.getline(first, 81);
 	cout << first << linenr << endl;
 	strcpy(namef[linenr], first);
@@ -140,30 +140,28 @@ int main()
       }
       ifstream myfile1("lnames.txt");
       char last[81];
-      linenr = 0; //restart count
-      while (linenr < 10) {
+      linenr = 0; //restar count
+      while (linenr < 20) {
 	myfile1.getline(last, 81);
 	strcpy(namel[linenr], last);
 	linenr++;
       }
       while (num > 0) {
 	student* newStudent = new student();  //initalize new student
-	//make random numbers between 0 and 9
-	int randomf = rand() % 9;
-	int randoml = rand() % 9;
+	//make random numbers between 0 and 19
+	int randomf = rand() % 19;
+	int randoml = rand() % 19;
 	//assign random data to new studen
 	strcpy(newStudent->Fname, namef[randomf]);
 	strcpy(newStudent->Lname, namel[randoml]);
 	newStudent->id = randid;
 	newStudent->gpa = (float)rand()/(RAND_MAX)*5;
-	//increment by 100
-	randid = randid + 100;
-	      
+	randid = randid + 10;
 	//add new student genrated
-	ADD(list, newStudent, size);
+	ADD(list, newStud, size);
 	//balance if collision
-	if (COLL(list, size)) {
-	  cout << endl << "Changing hash table array to double the size." << endl;
+	if (checkCollision(list, size)) {
+	  cout << endl << ">>Rebalancing hash table array to double the size." << endl;
 	  student** temp = new student*[size];  //create temp array
 	  for (int m = 0; m < size; m++) {
 	    temp[m] = list[m];
