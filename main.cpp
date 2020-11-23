@@ -11,7 +11,8 @@
 
 using namespace std;
 
-struct student {
+struct student 
+{
   char Fname[81];
   char Lname[81];
   int id;
@@ -26,7 +27,8 @@ void PRINT(student** list, int size);
 void REMOVE(student** list, int id, int size);
 bool COLL(student** list, int size);
 
-int main() {
+int main() 
+{
   //variables
   bool run = true;
   char input[10];
@@ -34,12 +36,14 @@ int main() {
   //hash table variabes
   student** list = new student*[100];
   int size = 100;
-  while (run) {
+  while (run) 
+  {
     cout << endl << "You can: add, addrand, remove, print, quit." << endl;
     cin.get(input, 10);
     cin.clear();
     cin.ignore(10000, '\n');
-    if (strcmp(input, "add") == 0) {  //add student manually
+    if (strcmp(input, "add") == 0) 
+    {  //add student manually
       //get info from user input
       student* newStudent = new student();
       newStudent->next = NULL;
@@ -63,7 +67,8 @@ int main() {
       ADD(list, newStudent, size);
       cout << endl << "New student added to hash table." << endl;
       //balance if collision
-      if (COLL(list, size)) {
+      if (COLL(list, size)) 
+      {
 	cout << endl << "Changing hash table array to double the size." << endl;
 	student** temp = new student*[size];  //create temp array
 	for (int m = 0; m < size; m++) 
@@ -79,7 +84,8 @@ int main() {
 	//re-add all students to newly sized list
 	for (int a = 0; a < size; a++) 
 	{
-	  if (temp[a] != NULL) {
+	  if (temp[a] != NULL) 
+	  {
 	    student* move = temp[a];
 	    if (move->next != NULL) 
 	    {
@@ -121,7 +127,8 @@ int main() {
       //initialize name arrays
       char** namef = new char*[20];
       char** namel = new char*[20];
-      for (int i = 0; i < 20; i++) {
+      for (int i = 0; i < 20; i++) 
+      {
 	namef[i] = new char[81];
 	namel[i] = new char[81];
       }
@@ -135,7 +142,6 @@ int main() {
       while (linenr < 20) 
       {
 	myfile.getline(first, 81);
-	cout << first << linenr << endl;
 	strcpy(namef[linenr], first);
 	linenr++;
       }
@@ -162,19 +168,23 @@ int main() {
 	//add new student genrated
 	ADD(list, newStudent, size);
 	//balance if collision
-	if (COLL(list, size)) {
+	if (COLL(list, size)) 
+	{
 	  cout << endl << "Changing hash table array to double the size." << endl;
 	  student** temp = new student*[size];  //create temp array
-	  for (int m = 0; m < size; m++) {
+	  for (int m = 0; m < size; m++) 
+	  {
 	    temp[m] = list[m];
 	  }
 	  int newsize = 2*size;
 	  list = new student*[newsize]; //recreate list to double
-	  for (int c = 0; c < newsize; c++) {
+	  for (int c = 0; c < newsize; c++) 
+	  {
 	    list[c] = NULL;
 	  }
 	  //re-add all students to newly sized list
-	  for (int a = 0; a < size; a++) {
+	  for (int a = 0; a < size; a++) 
+	  {
 	    if (temp[a] != NULL) {
 	      student* move = temp[a];
 	      if (move->next != NULL) {
@@ -182,7 +192,8 @@ int main() {
 		move->next = NULL;
 		nxt->prev = NULL;
 		ADD(list, nxt, newsize);
-		if (nxt->next != NULL) {
+		if (nxt->next != NULL) 
+		{
 		  student* dnxt = nxt->next;
 		  nxt->next = NULL;
 		  dnxt->prev = NULL;
@@ -198,7 +209,8 @@ int main() {
 	num--;
       }
     }
-    else if (strcmp(input, "quit") == 0) {
+    else if (strcmp(input, "quit") == 0) 
+    {
       cout << endl << "Quitting" << endl;
       run = false;
     } else {
@@ -209,15 +221,18 @@ int main() {
 }
 
 //basically the hash function
-void ADD(student** list, student* newStudent, int size) {
+void ADD(student** list, student* newStudent, int size) 
+{
   int index = (newStudent->id) % size;
   //put new student in current array
-  if (list[index] == NULL) {
+  if (list[index] == NULL) 
+  {
     //no colision, simply add to list
     list[index] = newStudent;
   } else {
     //collision, then add as next ptr
-    if ((list[index])->next == NULL) {
+    if ((list[index])->next == NULL) 
+    {
       //no previous collision
       (list[index])->next = newStudent;
       (list[index]->next)->prev = (list[index])->next;
@@ -229,13 +244,18 @@ void ADD(student** list, student* newStudent, int size) {
   }
 }
 
-bool COLL(student** list, int size) {
+bool COLL(student** list, int size) 
+{
   bool newlist = false;  //keep trak whether there's a need to make a new list
   int ctr = 0;
-  while (newlist == false && ctr < size) {
-    if (list[ctr] != NULL) {
-      if ((list[ctr])->next != NULL) {
-	if (((list[ctr])->next)->next != NULL) {
+  while (newlist == false && ctr < size) 
+  {
+    if (list[ctr] != NULL) 
+    {
+      if ((list[ctr])->next != NULL) 
+      {
+	if (((list[ctr])->next)->next != NULL) 
+	{
 	  newlist = true;
 	}
       }
@@ -245,16 +265,20 @@ bool COLL(student** list, int size) {
   return newlist;
 }
 
-void PRINT(student** list, int size) {
-  for (int i = 0; i < size; i++) {
+void PRINT(student** list, int size) 
+{
+  for (int i = 0; i < size; i++) 
+  {
     student* curr = list[i];
-    if (curr != NULL) {
+    if (curr != NULL) 
+    {
       cout << curr->Fname << " ";
       cout << curr->Lname;
       cout << " #" << curr->id << " GPA:";
       cout << fixed << setprecision(2) << curr->gpa;
       student* nxt = curr->next;
-      if (nxt != NULL) {
+      if (nxt != NULL) 
+      {
 	cout << '\t' << nxt->Fname << " ";
 	cout << nxt->Lname;
 	cout << "#" << nxt->id << " GPA:";
@@ -265,14 +289,18 @@ void PRINT(student** list, int size) {
   }
 }
 
-void REMOVE(student** list, int id, int size) {
+void REMOVE(student** list, int id, int size) 
+{
   int i = id % size;
-  if (list[i] == NULL) {
+  if (list[i] == NULL) 
+  {
     cout << endl << "They don't exist :(" << endl;
   } else {
-    if (list[i]->id == id) {
+    if (list[i]->id == id) 
+    {
       //found then delete
-      if (list[i]->next == NULL) {
+      if (list[i]->next == NULL) 
+      {
 	list[i] = NULL; 
       } else {
 	//replace with next in collision
