@@ -1,6 +1,8 @@
 //Hastable by Faizan Karim
 //randomly generated names come from a list i made
 //got names from google :/
+//kept getting a weird thing where the number of the line replaced the letters in the name
+//turns out, it was my text files fault and not my code, but it took a while to find out
 
 #include <iostream>
 #include <cstring>
@@ -32,8 +34,7 @@ int main()
   //variables
   bool run = true;
   char input[10];
-  int randid = 123; //keeps track or random id value
-  //hash table variabes
+  int randid = 123; //keeps track of random id
   student** list = new student*[100];
   int size = 100;
   while (run) 
@@ -44,7 +45,6 @@ int main()
     cin.ignore(10000, '\n');
     if (strcmp(input, "add") == 0) 
     {  //add student manually
-      //get info from user input
       student* newStudent = new student();
       newStudent->next = NULL;
       newStudent->prev = NULL;
@@ -66,7 +66,7 @@ int main()
       cin.ignore(81, '\n');
       ADD(list, newStudent, size);
       cout << endl << "New student added to hash table." << endl;
-      //balance if collision
+
       if (COLL(list, size)) 
       {
 	cout << endl << "Changing hash table array to double the size." << endl;
@@ -155,7 +155,7 @@ int main()
       }
       while (num > 0) 
       {
-	student* newStudent = new student();  //initalize new student
+	student* newStudent = new student();
 	//make random numbers between 0 and 19
 	int randomf = rand() % 19;
 	int randoml = rand() % 19;
@@ -182,7 +182,7 @@ int main()
 	  {
 	    list[c] = NULL;
 	  }
-	  //re-add all students to newly sized list
+	  //add all students to newly sized list
 	  for (int a = 0; a < size; a++) 
 	  {
 	    if (temp[a] != NULL) {
@@ -220,7 +220,6 @@ int main()
   return 0;
 }
 
-//basically the hash function
 void ADD(student** list, student* newStudent, int size) 
 {
   int index = (newStudent->id) % size;
@@ -244,6 +243,7 @@ void ADD(student** list, student* newStudent, int size)
   }
 }
 
+//collision
 bool COLL(student** list, int size) 
 {
   bool newlist = false;  //keep trak whether there's a need to make a new list
