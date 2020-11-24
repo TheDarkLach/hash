@@ -132,7 +132,7 @@ int main()
 	namef[i] = new char[81];
 	namel[i] = new char[81];
       }
-      cout << endl << "How many random students should be added: ";
+      cout << endl << "How many random students should be added?";
       cin >> num;
       cin.clear();
       cin.ignore(10000, '\n');
@@ -147,7 +147,7 @@ int main()
       }
       ifstream myfile1("lnames.txt");
       char last[81];
-      linenr = 0; //restar count
+      linenr = 0; 
       while (linenr < 20) {
 	myfile1.getline(last, 81);
 	strcpy(namel[linenr], last);
@@ -156,7 +156,7 @@ int main()
       while (num > 0) 
       {
 	student* newStudent = new student();
-	//make random numbers between 0 and 19
+	//create random numbers between 0 and 19
 	int randomf = rand() % 19;
 	int randoml = rand() % 19;
 	//assign random data
